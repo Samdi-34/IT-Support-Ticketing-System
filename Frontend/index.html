@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IT Support Ticketing System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>IT Support Desk</h1>
+    <p>Manage and track your IT support requests.</p>
+  </header>
+
+  <main>
+
+    <section class="panel">
+      <h2>Create a Support Ticket</h2>
+
+      <form id="ticketForm">
+
+        <label for="requester_id">Requester ID</label>
+        <input
+          type="number"
+          id="requester_id"
+          name="requester_id"
+          required
+          placeholder="e.g. 2"
+        >
+
+        <label for="title">Ticket Title</label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          required
+          placeholder="e.g. Laptop cannot connect to Wi-Fi"
+        >
+
+        <label for="description">Description</label>
+        <textarea
+          id="description"
+          name="description"
+          required
+          placeholder="Describe the problem"
+        ></textarea>
+
+        <label for="category">Category</label>
+        <select id="category" name="category" required>
+          <option value="">Select a category</option>
+          <option value="hardware">Hardware</option>
+          <option value="software">Software</option>
+          <option value="network">Network</option>
+          <option value="account">Account</option>
+          <option value="other">Other</option>
+        </select>
+
+        <label for="priority">Priority</label>
+        <select id="priority" name="priority">
+          <option value="low">Low</option>
+          <option value="medium" selected>Medium</option>
+          <option value="high">High</option>
+        </select>
+
+        <button type="submit">Submit Ticket</button>
+
+        <p id="formMessage" role="status"></p>
+
+      </form>
+    </section>
+
+
+    <section class="panel">
+
+      <h2>Support Tickets</h2>
+
+      <button id="refreshButton" type="button">
+        Refresh Tickets
+      </button>
+
+      <p id="ticketMessage" role="status"></p>
+
+      <div id="ticketList">
+        Loading tickets...
+      </div>
+
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

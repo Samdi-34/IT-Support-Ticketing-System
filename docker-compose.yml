@@ -1,0 +1,15 @@
+
+services:
+  backend:
+    build:
+      context: ./Backend
+    container_name: ticketing-backend
+    ports:
+      - "5010:5010"
+    env_file:
+      - ./Backend/.env
+    environment:
+      PORT: 5010
+      DB_HOST: host.docker.internal
+      DB_PORT: 3307
+    restart: unless-stopped
