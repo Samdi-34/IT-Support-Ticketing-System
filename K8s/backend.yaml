@@ -1,0 +1,51 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: ticketing-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: saturdaysamdi/it-support-ticketing-system-backend:v1.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5010
+          env:
+            - name: PORT
+              value: "5010"
+            - name: DB_HOST
+              value: mysql
+            - name: DB_PORT
+              value: "3306"
+            - name: DB_USER
+              value: ticketing_app
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: mysql-user-password
+            - name: DB_NAME
+              value: it_support_db
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+  namespace: ticketing-system
+spec:
+  selector:
+    app: backend
+  ports:
+    - port: 5010
+      targetPort: 5010
+  type: ClusterIP
